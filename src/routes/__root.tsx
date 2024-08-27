@@ -21,9 +21,23 @@ export const Route = createRootRoute({
         <Link to="/crew" activeProps={activeProps}>
           Crew
         </Link>
+        {/* @ts-expect-error Router knows this does not exist and Typescript flags it as an error */}
+        <Link to="/totally-not-a-legit-route" activeProps={activeProps}>
+          Non existent route
+        </Link>
       </div>
       <Outlet />
       <TanStackRouterDevtools />
     </div>
   ),
+  notFoundComponent: () => {
+    return (
+      <div>
+        <p>
+          You might have ended up here by mistake, there's not such page here!
+        </p>
+        <Link to="/">Back to the home</Link>
+      </div>
+    );
+  },
 });
