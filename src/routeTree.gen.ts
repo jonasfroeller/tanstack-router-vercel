@@ -12,10 +12,11 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardImport } from './routes/dashboard'
-import { Route as UsersImport } from './routes/_users'
+import { Route as CrewImport } from './routes/crew'
 import { Route as IndexImport } from './routes/index'
-import { Route as UsersIndexImport } from './routes/users/index'
-import { Route as UsersIdImport } from './routes/users/$id'
+import { Route as CrewIndexImport } from './routes/crew/index'
+import { Route as CrewIdImport } from './routes/crew/$id'
+import { Route as CrewIdDetailImport } from './routes/crew/$id.detail'
 
 // Create/Update Routes
 
@@ -24,8 +25,8 @@ const DashboardRoute = DashboardImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const UsersRoute = UsersImport.update({
-  id: '/_users',
+const CrewRoute = CrewImport.update({
+  path: '/crew',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -34,14 +35,19 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const UsersIndexRoute = UsersIndexImport.update({
-  path: '/users/',
-  getParentRoute: () => rootRoute,
+const CrewIndexRoute = CrewIndexImport.update({
+  path: '/',
+  getParentRoute: () => CrewRoute,
 } as any)
 
-const UsersIdRoute = UsersIdImport.update({
-  path: '/users/$id',
-  getParentRoute: () => rootRoute,
+const CrewIdRoute = CrewIdImport.update({
+  path: '/$id',
+  getParentRoute: () => CrewRoute,
+} as any)
+
+const CrewIdDetailRoute = CrewIdDetailImport.update({
+  path: '/detail',
+  getParentRoute: () => CrewIdRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -55,11 +61,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/_users': {
-      id: '/_users'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof UsersImport
+    '/crew': {
+      id: '/crew'
+      path: '/crew'
+      fullPath: '/crew'
+      preLoaderRoute: typeof CrewImport
       parentRoute: typeof rootRoute
     }
     '/dashboard': {
@@ -69,19 +75,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
-    '/users/$id': {
-      id: '/users/$id'
-      path: '/users/$id'
-      fullPath: '/users/$id'
-      preLoaderRoute: typeof UsersIdImport
-      parentRoute: typeof rootRoute
+    '/crew/$id': {
+      id: '/crew/$id'
+      path: '/$id'
+      fullPath: '/crew/$id'
+      preLoaderRoute: typeof CrewIdImport
+      parentRoute: typeof CrewImport
     }
-    '/users/': {
-      id: '/users/'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof UsersIndexImport
-      parentRoute: typeof rootRoute
+    '/crew/': {
+      id: '/crew/'
+      path: '/'
+      fullPath: '/crew/'
+      preLoaderRoute: typeof CrewIndexImport
+      parentRoute: typeof CrewImport
+    }
+    '/crew/$id/detail': {
+      id: '/crew/$id/detail'
+      path: '/detail'
+      fullPath: '/crew/$id/detail'
+      preLoaderRoute: typeof CrewIdDetailImport
+      parentRoute: typeof CrewIdImport
     }
   }
 }
@@ -90,9 +103,11 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
+  CrewRoute: CrewRoute.addChildren({
+    CrewIdRoute: CrewIdRoute.addChildren({ CrewIdDetailRoute }),
+    CrewIndexRoute,
+  }),
   DashboardRoute,
-  UsersIdRoute,
-  UsersIndexRoute,
 })
 
 /* prettier-ignore-end */
@@ -104,26 +119,37 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/_users",
-        "/dashboard",
-        "/users/$id",
-        "/users/"
+        "/crew",
+        "/dashboard"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/_users": {
-      "filePath": "_users.tsx"
+    "/crew": {
+      "filePath": "crew.tsx",
+      "children": [
+        "/crew/$id",
+        "/crew/"
+      ]
     },
     "/dashboard": {
       "filePath": "dashboard.tsx"
     },
-    "/users/$id": {
-      "filePath": "users/$id.tsx"
+    "/crew/$id": {
+      "filePath": "crew/$id.tsx",
+      "parent": "/crew",
+      "children": [
+        "/crew/$id/detail"
+      ]
     },
-    "/users/": {
-      "filePath": "users/index.tsx"
+    "/crew/": {
+      "filePath": "crew/index.tsx",
+      "parent": "/crew"
+    },
+    "/crew/$id/detail": {
+      "filePath": "crew/$id.detail.tsx",
+      "parent": "/crew/$id"
     }
   }
 }

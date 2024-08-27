@@ -5,8 +5,8 @@ const activeProps = { style: { fontWeight: "bold" } };
 
 export const Route = createRootRoute({
   component: () => (
-    <div className="px-4 py-2">
-      <div className="text-3xl mb-2">My cool application</div>
+    <div className="px-4 py-2 flex flex-col gap-4">
+      <div className="text-3xl">My cool application</div>
       <div className="flex gap-2">
         <Link to="/" activeProps={activeProps}>
           Home
@@ -18,8 +18,8 @@ export const Route = createRootRoute({
         >
           Dashboard
         </Link>
-        <Link to="/users" activeProps={activeProps}>
-          Users
+        <Link to="/crew" activeProps={activeProps}>
+          Crew
         </Link>
       </div>
       <Outlet />

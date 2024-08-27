@@ -1,13 +1,13 @@
 import { WidgetControls } from "../routes/dashboard";
 
 export const WidgetsControlsBar = ({
-  controls: config,
-  updateControls: updateConfig,
+  controls,
+  updateControls,
 }: {
   controls: WidgetControls;
   updateControls: (name: keyof WidgetControls, value: unknown) => void;
 }) => (
-  <div className="border p-2 flex gap-4 my-4">
+  <div className="border p-2 flex gap-4 mb-4">
     <div className="flex flex-col">
       <h3>Distance Unit</h3>
       <label>
@@ -15,8 +15,8 @@ export const WidgetsControlsBar = ({
           type="radio"
           name="distanceUnit"
           value="km"
-          checked={config.distanceUnit === "km"}
-          onChange={() => updateConfig("distanceUnit", "km")}
+          checked={controls.distanceUnit === "km"}
+          onChange={() => updateControls("distanceUnit", "km")}
           className="mr-2"
         />
         Kilometers
@@ -26,8 +26,8 @@ export const WidgetsControlsBar = ({
           type="radio"
           name="distanceUnit"
           value="mi"
-          checked={config.distanceUnit === "mi"}
-          onChange={() => updateConfig("distanceUnit", "mi")}
+          checked={controls.distanceUnit === "mi"}
+          onChange={() => updateControls("distanceUnit", "mi")}
           className="mr-2"
         />
         Miles
@@ -40,8 +40,8 @@ export const WidgetsControlsBar = ({
           type="radio"
           name="temperatureUnit"
           value="c"
-          checked={config.temperatureUnit === "c"}
-          onChange={() => updateConfig("temperatureUnit", "c")}
+          checked={controls.temperatureUnit === "c"}
+          onChange={() => updateControls("temperatureUnit", "c")}
           className="mr-2"
         />
         Celsius
@@ -51,8 +51,8 @@ export const WidgetsControlsBar = ({
           type="radio"
           name="temperatureUnit"
           value="f"
-          checked={config.temperatureUnit === "f"}
-          onChange={() => updateConfig("temperatureUnit", "f")}
+          checked={controls.temperatureUnit === "f"}
+          onChange={() => updateControls("temperatureUnit", "f")}
           className="mr-2"
         />
         Fahrenheit
@@ -63,8 +63,8 @@ export const WidgetsControlsBar = ({
       <label>
         <input
           type="checkbox"
-          checked={config.showSpeed}
-          onChange={() => updateConfig("showSpeed", !config.showSpeed)}
+          checked={controls.showSpeed}
+          onChange={() => updateControls("showSpeed", !controls.showSpeed)}
           className="mr-2"
         />
         Show Speed
@@ -76,13 +76,13 @@ export const WidgetsControlsBar = ({
         <label>
           <input
             type="checkbox"
-            checked={config.pressureSensors.includes("heatShield")}
+            checked={controls.pressureSensors.includes("heatShield")}
             onChange={() =>
-              updateConfig(
+              updateControls(
                 "pressureSensors",
-                config.pressureSensors.includes("heatShield")
-                  ? config.pressureSensors.filter((s) => s !== "heatShield")
-                  : [...config.pressureSensors, "heatShield"]
+                controls.pressureSensors.includes("heatShield")
+                  ? controls.pressureSensors.filter((s) => s !== "heatShield")
+                  : [...controls.pressureSensors, "heatShield"]
               )
             }
             className="mr-2"
@@ -92,13 +92,13 @@ export const WidgetsControlsBar = ({
         <label>
           <input
             type="checkbox"
-            checked={config.pressureSensors.includes("thruster")}
+            checked={controls.pressureSensors.includes("thruster")}
             onChange={() =>
-              updateConfig(
+              updateControls(
                 "pressureSensors",
-                config.pressureSensors.includes("thruster")
-                  ? config.pressureSensors.filter((s) => s !== "thruster")
-                  : [...config.pressureSensors, "thruster"]
+                controls.pressureSensors.includes("thruster")
+                  ? controls.pressureSensors.filter((s) => s !== "thruster")
+                  : [...controls.pressureSensors, "thruster"]
               )
             }
             className="mr-2"
@@ -108,13 +108,13 @@ export const WidgetsControlsBar = ({
         <label>
           <input
             type="checkbox"
-            checked={config.pressureSensors.includes("fuelCell")}
+            checked={controls.pressureSensors.includes("fuelCell")}
             onChange={() =>
-              updateConfig(
+              updateControls(
                 "pressureSensors",
-                config.pressureSensors.includes("fuelCell")
-                  ? config.pressureSensors.filter((s) => s !== "fuelCell")
-                  : [...config.pressureSensors, "fuelCell"]
+                controls.pressureSensors.includes("fuelCell")
+                  ? controls.pressureSensors.filter((s) => s !== "fuelCell")
+                  : [...controls.pressureSensors, "fuelCell"]
               )
             }
             className="mr-2"
