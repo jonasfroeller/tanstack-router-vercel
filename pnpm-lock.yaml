@@ -11,12 +11,18 @@ importers:
       '@tanstack/react-router':
         specifier: ^1.50.1
         version: 1.50.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@tanstack/router-zod-adapter':
+        specifier: ^1.50.1
+        version: 1.50.1(@tanstack/react-router@1.50.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(zod@3.23.8)
       react:
         specifier: ^18.3.1
         version: 18.3.1
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@eslint/js':
         specifier: ^9.9.0
@@ -488,6 +494,13 @@ packages:
         optional: true
       webpack:
         optional: true
+
+  '@tanstack/router-zod-adapter@1.50.1':
+    resolution: {integrity: sha512-XaN85sqy6VIZJAFqYOCyJsHsErI+Io6dEiOuUh+qt0VQ3HcICybv9km/XMqTyZU61ILYf+B9bTIWQZ0kxtVOlQ==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@tanstack/react-router': '>=1.43.2'
+      zod: '>=3'
 
   '@tanstack/store@0.5.5':
     resolution: {integrity: sha512-EOSrgdDAJExbvRZEQ/Xhh9iZchXpMN+ga1Bnk8Nmygzs8TfiE6hbzThF+Pr2G19uHL6+DTDTHhJ8VQiOd7l4tA==}
@@ -1605,6 +1618,11 @@ snapshots:
       vite: 5.4.2
     transitivePeerDependencies:
       - supports-color
+
+  '@tanstack/router-zod-adapter@1.50.1(@tanstack/react-router@1.50.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(zod@3.23.8)':
+    dependencies:
+      '@tanstack/react-router': 1.50.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      zod: 3.23.8
 
   '@tanstack/store@0.5.5': {}
 
